@@ -22,3 +22,5 @@ eureka:
     service-url:
       defaultZone: http://localhost:19090/eureka/
 
+jwt:
+  secretKey: bXlmaXJzdG1zYXByYWN0aWNlcHJvamVjdHN1Y2Vzc2Z1bGluZ3JlbWluZWdvam9zYXRvcnVzdW1tb25lcnN3YXJmdW5ueWdhbWVnb2RnYW1l

@@ -9,6 +9,7 @@ spring:
         native:
           search-locations: classpath:/config-repo
 
+
 eureka:
   client:
     service-url:
@@ -16,4 +17,6 @@ eureka:
 
 server:
   port: 19000
+
+
 
