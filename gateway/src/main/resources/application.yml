@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: gateway-service
+  main:
+    web-application-type: reactive
+  profiles:
+    active: local
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

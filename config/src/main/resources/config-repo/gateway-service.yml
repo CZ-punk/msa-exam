@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 서비스 디스커버리를 통해 동적으로 라우트를 생성하도록 설정
+      routes:
+        - id: users-service  # 라우트 식별자
+          uri: lb://user-service # 'users-service'라는 이름으로 로드 밸런싱된 서비스로 라우팅
+          predicates:
+            - Path=/user/** # /users/** 경로로 들어오는 요청을 이 라우트로 처리
+        - id: order-service  # 라우트 식별자
+          uri: lb://order-service  # 'orders-service'라는 이름으로 로드 밸런싱된 서비스로 라우팅
+          predicates:
+            - Path=/orders/** #/orders/** 경로로 들어오는 요청을 이 라우트로 처리
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
