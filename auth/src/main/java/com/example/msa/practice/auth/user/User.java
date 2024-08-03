@@ -1,17 +1,17 @@
 package com.example.msa.practice.auth.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
+@Data
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String username;
     private String password;

@@ -38,3 +38,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ewqDSA19@&
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG

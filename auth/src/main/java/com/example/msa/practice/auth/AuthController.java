@@ -1,8 +1,8 @@
 package com.example.msa.practice.auth;
 
-import com.example.msa.practice.auth.user.UserRoleEnum;
+import com.example.msa.practice.auth.dto.SigninDto;
+import com.example.msa.practice.auth.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,25 +18,14 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupDto requestDto) {
-        authService.signup(requestDto.username, requestDto.paasword, requestDto.adminCode);
+        authService.signup(requestDto.getUsername(), requestDto.getPassword(), requestDto.getCode());
         return ResponseEntity.ok("Success SignUp!");
     }
 
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody SigninDto requestDto) {
-        String token = authService.signin(requestDto.username, requestDto.password);
+        String token = authService.signin(requestDto.getUsername(), requestDto.getPassword());
         return ResponseEntity.ok(token);
     }
 
-
-    public class SignupDto {
-        private String username;
-        private String paasword;
-        private String adminCode;
-    }
-
-    public class SigninDto {
-        private String username;
-        private String password;
-    }
 }

@@ -8,6 +8,11 @@ spring:
       server:
         native:
           search-locations: classpath:/config-repo
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ewqDSA19@&
+    url: jdbc:mysql://localhost:3306/msa_practice
 
 
 eureka:
@@ -17,6 +22,7 @@ eureka:
 
 server:
   port: 19000
+
 
 
 

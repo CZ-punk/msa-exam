@@ -11,11 +11,12 @@ spring:
         enabled: true
         service-id: config-server
 
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:19090/eureka
+  instance:
+   hostname: localhost
 
 server:
   port: 1234

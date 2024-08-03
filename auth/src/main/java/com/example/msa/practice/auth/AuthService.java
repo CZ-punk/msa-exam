@@ -7,14 +7,11 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.security.Key;
 import java.util.Base64;
@@ -48,7 +45,7 @@ public class AuthService {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    public String createToken (String username, UserRoleEnum role) {
+    public String createToken(String username, UserRoleEnum role) {
         return BEARER_PREFIX + Jwts.builder()
                 .claim("username", username)
                 .claim(AUTHORIZATION_KEY, role.getAuthority())
@@ -59,31 +56,17 @@ public class AuthService {
                 .compact();
     }
 
-    public String getJwtFromHeader(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-
-    public boolean validationToken(String token) {
-        try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return false;
-    }
-
     public void signup(String username, String password, String code) {
         User user = userRepository.findByUsername(username).orElse(null);
-        if (user == null) {
+        if (user != null) {
             throw new IllegalArgumentException("Duplicated username!");
         }
         String encodedPassword = passwordEncoder.encode(password);
-        if (code.equals(ADMIN_CODE)) {
+
+        log.info("yml admin_code: {}", ADMIN_CODE);
+        log.info("input admin_code: {}", code);
+
+        if (code != null && code.equals(ADMIN_CODE)) {
             log.info("Find Admin Code! Your Authority is Admin!");
             userRepository.save(new User(username, encodedPassword, UserRoleEnum.ADMIN));
         } else {
