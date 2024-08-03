@@ -1,11 +1,30 @@
 spring:
   application:
     name: auth-service
+  profiles:
+    active: local
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
 
-server:
-  port: 19031
 
 eureka:
   client:
     service-url:
-      defaultZone: http:/localhost:19090/eureka
+      defaultZone: http://localhost:19090/eureka
+
+server:
+  port: 1234
+
+
+# 수동으로 config 정보 update
+# url path: /actuator/refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

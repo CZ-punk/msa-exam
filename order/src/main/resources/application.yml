@@ -1,6 +1,16 @@
 spring:
   application:
     name: order-service
+  profiles:
+    active: local
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
 
 eureka:
   client:
@@ -8,4 +18,14 @@ eureka:
       defaultZone: http://localhost:19090/eureka
 
 server:
-  port: 19011
+  port: 4321
+
+# 수동으로 config 정보 update
+# url path: /actuator/refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+

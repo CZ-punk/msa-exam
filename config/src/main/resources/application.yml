@@ -1,6 +1,13 @@
 spring:
   application:
-    name: config-service
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config-repo
 
 eureka:
   client:
@@ -8,4 +15,5 @@ eureka:
       defaultZone: http://localhost:19090/eureka
 
 server:
-  port: 8888
+  port: 19000
+
