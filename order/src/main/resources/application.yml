@@ -16,19 +16,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:19090/eureka
+  instance:
+    hostname: localhost
 
 server:
   port: 4321
-
-# 수동으로 config 정보 update
-# url path: /actuator/refresh
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh
-  zipkin:
-    tracing:
-      endpoint: "http://localhost:9411/api/v2/spans"
 
 

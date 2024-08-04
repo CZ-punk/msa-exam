@@ -33,9 +33,13 @@ public class ProductResponseDto {
         this.quantity = product.getQuantity();
         this.description = product.getDescription();
         this.createdAt = product.getCreatedAt();
-        this.updatedAt = product.getUpdatedAt();;
+        this.updatedAt = product.getUpdatedAt();
         this.createdBy = product.getCreatedBy();
         this.updatedBy = product.getUpdatedBy();
+    }
+
+    public ProductResponseDto(String message) {
+        this.description = message;
     }
 
 

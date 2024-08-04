@@ -26,12 +26,14 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: prometheus, refresh
   prometheus:
     metrics:
       export:
         enabled: true
-
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
 
 spring:
   datasource:

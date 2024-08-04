@@ -1,8 +1,8 @@
-package com.example.msa.practice.product.core;
+package com.example.msa.practice.order.core.auditor;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -36,8 +36,5 @@ public class BaseEntity {
     private LocalDateTime deleteAt = null;
     @Setter
     private String deleteBy = null;
-
-
-
 
 }

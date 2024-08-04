@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
@@ -17,6 +19,8 @@ import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;
+import java.util.List;
+import java.util.function.Consumer;
 
 @Slf4j(topic = "Gateway - Jwt Authentication filter")
 @Component
@@ -37,10 +41,10 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         }
 
         // 토큰 추출
-        String token = extractToken((HttpServletRequest) exchange.getRequest());
+        String token = extractToken(exchange);
 
         // 토큰 유효성 검사
-        if (token == null && !validationToken(token)) {
+        if (token == null || !validationToken(token)) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         }
@@ -49,9 +53,9 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         Claims claims = extractClaims(token);
 
         // 정보를 토대로 username, role 을 요청에 담기
-        setRequestInfo(exchange, claims);
+        ServerWebExchange customExchange = setRequestInfo(exchange, claims);
 
-        return chain.filter(exchange);
+        return chain.filter(customExchange);
     }
 
     @Override
@@ -59,8 +63,8 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 
-    public String extractToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+    public String extractToken(ServerWebExchange exchange) {
+        String bearerToken = exchange.getRequest().getHeaders().get(AUTHORIZATION_HEADER).getFirst();
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
@@ -80,11 +84,15 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 
     public Claims extractClaims(String token) {
         SecretKey key = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
-        return (Claims) Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 
-    public void setRequestInfo(ServerWebExchange exchange, Claims claims) {
-        exchange.getRequest().getHeaders().set("X-ROLE", (String) claims.get(AUTHORIZATION_KEY));
-        exchange.getRequest().getHeaders().set("X-USERNAME", (String) claims.get(AUTHORIZATION_USERNAME));
+    public ServerWebExchange setRequestInfo(ServerWebExchange exchange, Claims claims) {
+        return exchange.mutate().request(
+                exchange.getRequest().mutate().headers(headers -> {
+                    headers.set("X-ROLE", String.valueOf(claims.get(AUTHORIZATION_KEY)));
+                    headers.set("X-USERNAME", String.valueOf(claims.get(AUTHORIZATION_USERNAME)));
+                }).build()
+        ).build();
     }
 }
