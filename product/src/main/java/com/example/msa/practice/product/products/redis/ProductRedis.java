@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.RedisHash;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("product")
+@RedisHash("recovery-product")
 public class ProductRedis {
 
     @Id

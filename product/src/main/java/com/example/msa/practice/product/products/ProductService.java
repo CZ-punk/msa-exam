@@ -126,4 +126,7 @@ public class ProductService {
         productRedisRepository.deleteAll();
     }
 
+    public void clearRedis() {
+        productRedisRepository.deleteAll();
+    }
 }

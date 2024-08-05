@@ -41,7 +41,7 @@ spring:
     url: jdbc:mysql://localhost:3306/msa_practice
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: ewqDSA19@&
+    password: ewqdsa1927
   jpa:
     hibernate:
       ddl-auto: update

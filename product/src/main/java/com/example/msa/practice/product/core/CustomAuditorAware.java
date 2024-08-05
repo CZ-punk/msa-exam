@@ -15,9 +15,6 @@ public class CustomAuditorAware implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-//        if (request.getRequestURI().startsWith("/order")) {
-//            return Optional.empty();
-//        }
         return Optional.ofNullable(request.getHeader("X-USERNAME"));
     }
 }

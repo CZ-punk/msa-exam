@@ -65,10 +65,12 @@ public class ProductController {
 
     @PostMapping("/{id}/reduceQuantity")
     public HttpStatus reduceQuantity(@PathVariable Long id, @RequestParam("quantity") Integer quantity) {
+        return productService.reduceQuantity(id, quantity);
+    }
 
-        HttpStatus status = productService.reduceQuantity(id, quantity);
-        log.info("controller => status: {}", status);
-        return status;
+    @GetMapping("/clear_redis")
+    public void clearRedis() {
+        productService.clearRedis();
     }
 
     public void ROLE_CHECK(HttpServletRequest request) {

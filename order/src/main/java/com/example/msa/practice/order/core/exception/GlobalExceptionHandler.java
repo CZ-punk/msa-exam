@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CustomClientException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public void CustomClientExceptionHandle(CustomClientException e) {
         log.error(e.getMessage());
     }

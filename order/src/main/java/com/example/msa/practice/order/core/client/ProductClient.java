@@ -18,5 +18,8 @@ public interface ProductClient {
     @PostMapping("/product/{id}/reduceQuantity")
     HttpStatus reduceProductQuantity(@PathVariable("id") Long id, @RequestParam("quantity") Integer quantity);
 
+    @GetMapping("/product/clear_redis")
+    void clearProductRedis();
+
 
 }

@@ -27,6 +27,7 @@ public class OrderService {
     private final ProductClient productClient;
 
 
+
     @Transactional
     public List<OrderResponseDto> createOrder(List<OrderRequestDto> requestDto) {
 
@@ -47,6 +48,7 @@ public class OrderService {
             orderItem.connectOrder(order);
             orderItemList.add(orderItem);
         }
+        productClient.clearProductRedis();
 
         orderRepository.save(order);
         return orderItemList.stream()
