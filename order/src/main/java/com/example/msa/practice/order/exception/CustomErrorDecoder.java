@@ -1,9 +1,9 @@
-package com.example.msa.practice.order.core.exception;
+package com.example.msa.practice.order.exception;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
+import jakarta.ws.rs.InternalServerErrorException;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerErrorException;
 
 @Component
 public class CustomErrorDecoder implements ErrorDecoder {
@@ -14,7 +14,7 @@ public class CustomErrorDecoder implements ErrorDecoder {
         if (response.status() >= 400 || response.status() < 500) {
             return new CustomClientException("Feign Client Exception: " + response.status(), response.status());
         } else if (response.status() >= 500) {
-            return new ServerErrorException("Sorry...finding error", null);
+            return new InternalServerErrorException();
         }
         return defaultErrorDecoder.decode(s, response);
     }

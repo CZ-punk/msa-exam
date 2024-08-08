@@ -1,62 +1,55 @@
 package com.example.msa.practice.product.core;
 
 import com.example.msa.practice.product.products.ProductRequestDto;
-import com.example.msa.practice.product.products.redis.ProductRedis;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Product extends BaseEntity {
+public class Product {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private Long price;
-    private Integer quantity;
-    private String description;
+    private Integer supply_price;
 
 
     public Product(ProductRequestDto dto) {
         name = dto.getName();
-        price = dto.getPrice();
-        quantity = dto.getQuantity();
-        description = dto.getDescription();
+        supply_price = dto.getSupply_price();
     }
 
     public Product updateProduct(ProductRequestDto dto) {
         name = dto.getName();
-        price = dto.getPrice();
-        quantity = dto.getQuantity();
-        description = dto.getDescription();
+        supply_price = dto.getSupply_price();
         return this;
     }
 
-    public Product deleteProduct(String username) {
-        this.setDeleteAt(LocalDateTime.now());
-        this.setDeleteBy(username);
-        return this;
-    }
+//    public Product deleteProduct(String username) {
+//        this.setDeleteAt(LocalDateTime.now());
+//        this.setDeleteBy(username);
+//        return this;
+//    }
 
-    public Product updateQuantity(Integer quantity) {
-        this.quantity = quantity;
-        return this;
-    }
+//    public Product updateQuantity(Integer quantity) {
+//        this.quantity = quantity;
+//        return this;
+//    }
 
-    public Product recoveryQuantity(ProductRedis product) {
-        this.quantity = product.getQuantity();
-        return this;
-    }
+//    public Product recoveryQuantity(ProductRedis product) {
+//        this.quantity = product.getQuantity();
+//        return this;
+//    }
 
 }

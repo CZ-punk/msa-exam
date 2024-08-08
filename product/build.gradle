@@ -36,7 +36,7 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+//	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'io.micrometer:micrometer-tracing-bridge-brave'

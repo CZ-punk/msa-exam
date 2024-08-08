@@ -1,15 +1,9 @@
 package com.example.msa.practice.product.products;
 
 import com.example.msa.practice.product.core.Product;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -17,30 +11,11 @@ import java.time.LocalDateTime;
 public class ProductResponseDto {
 
     private String name;
-    private Long price;
-    private Integer quantity;
-    private String description;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
-    private String createdBy;
-    private String updatedBy;
+    private Integer supply_price;
 
     public ProductResponseDto(Product product) {
         this.name = product.getName();
-        this.price = product.getPrice();
-        this.quantity = product.getQuantity();
-        this.description = product.getDescription();
-        this.createdAt = product.getCreatedAt();
-        this.updatedAt = product.getUpdatedAt();
-        this.createdBy = product.getCreatedBy();
-        this.updatedBy = product.getUpdatedBy();
+        this.supply_price = product.getSupply_price();
     }
-
-    public ProductResponseDto(String message) {
-        this.description = message;
-    }
-
 
 }

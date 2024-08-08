@@ -5,15 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderRequestDto {
+public class RequiredResponseDto {
 
-    private String orderName;
-    private List<Long> orderItemList;
-
-
+    private Long order_id;
+    private List<Integer> product_ids;
 }

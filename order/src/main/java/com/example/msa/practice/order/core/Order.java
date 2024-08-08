@@ -1,6 +1,5 @@
 package com.example.msa.practice.order.core;
 
-import com.example.msa.practice.order.core.auditor.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,19 +15,27 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Table(name = "orders")
-public class Order extends BaseEntity {
+public class Order {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems = new ArrayList<>();
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private List<OrderItem> product_ids = new ArrayList<>();
 
-    public Order(OrderStatus status) {
-        this.status = status;
+    public Order(String name) {
+        this.name = name;
     }
+
+    //    @Enumerated(EnumType.STRING)
+//    private OrderStatus status;
+
+//    public Order(OrderStatus status) {
+//        this.status = status;
+//    }
+
 }
 
 

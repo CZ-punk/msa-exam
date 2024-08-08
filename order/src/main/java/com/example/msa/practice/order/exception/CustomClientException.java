@@ -1,5 +1,8 @@
-package com.example.msa.practice.order.core.exception;
+package com.example.msa.practice.order.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CustomClientException extends RuntimeException {
     private final int statusCode;
 
@@ -8,7 +11,4 @@ public class CustomClientException extends RuntimeException {
         this.statusCode = statusCode;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
 }
