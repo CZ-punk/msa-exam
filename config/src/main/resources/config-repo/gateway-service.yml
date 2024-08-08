@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # 서비스 디스커버리를 통해 동적으로 라우트를 생성하도록 설정
+      routes:
+        - id: user-service  # 라우트 식별자
+          uri: lb://user-service # 'users-service'라는 이름으로 로드 밸런싱된 서비스로 라우팅
+          predicates:
+            - Path=/user/** # /users/** 경로로 들어오는 요청을 이 라우트로 처리
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/product/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
+jwt:
+  secretKey: bXlmaXJzdG1zYXByYWN0aWNlcHJvamVjdHN1Y2Vzc2Z1bGluZ3JlbWluZWdvam9zYXRvcnVzdW1tb25lcnN3YXJmdW5ueWdhbWVnb2RnYW1l
+  issuer: auth-service
+  expiration: 3600_000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, refresh
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
