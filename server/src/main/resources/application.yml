@@ -20,8 +20,6 @@ eureka:
   server:
     evictableCacheSize: 1000  # 캐시 크기 조정
 
-
-
 logging:
   level:
     com.netflix.eureka: WARN  # WARN 이상의 로그만 출력
