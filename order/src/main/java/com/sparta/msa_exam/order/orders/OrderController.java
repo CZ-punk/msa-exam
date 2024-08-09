@@ -32,7 +32,6 @@ public class OrderController {
     public static class AddDto {
         private Long product_id;
     }
-
 //    private final String ROLE_ADMIN = "ROLE_ADMIN";
 //    public void ROLE_CHECK(HttpServletRequest request) {
 //        if (request.getHeader("X-ROLE").equals(ROLE_ADMIN)) {
