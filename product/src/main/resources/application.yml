@@ -1,0 +1,60 @@
+server:
+  port: 19093
+
+spring:
+  application:
+    name: product-service
+  profiles:
+    active: dev
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, refresh
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka
+  instance:
+    hostname: localhost
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 5
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 60000
+        failureRateThreshold: 50
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 20s
+
+# config-server 구성시 사용
+#spring:
+#  application:
+#    name: product-service
+#  profiles:
+#    active: local
+#  config:
+#    import: "configserver:"
+#  cloud:
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: config-server
