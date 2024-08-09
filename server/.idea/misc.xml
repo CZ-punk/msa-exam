@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../../../boot_camp/MSA/com.spring-cloud.eureka.client.auth" />
+    <file type="web" url="file://$PROJECT_DIR$/../../../boot_camp/MSA/com.spring-cloud.eureka.client.config" />
+    <file type="web" url="file://$PROJECT_DIR$/../../../boot_camp/MSA/com.spring-cloud.eureka.client.gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/../../../boot_camp/MSA/com.spring-cloud.eureka.client.order" />
+    <file type="web" url="file://$PROJECT_DIR$/../auth" />
+    <file type="web" url="file://$PROJECT_DIR$/../config" />
+    <file type="web" url="file://$PROJECT_DIR$/../gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/../order" />
+    <file type="web" url="file://$PROJECT_DIR$/../product" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$PROJECT_DIR$/../user" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="21" project-jdk-type="JavaSDK" />
+</project>
