@@ -6,9 +6,6 @@ spring:
     name: order-service
   profiles:
     active: dev
-  jpa:
-    hibernate:
-      ddl-auto: update
 
 logging:
   level:

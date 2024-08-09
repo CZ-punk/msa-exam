@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/msa_practice
+    url: jdbc:mysql://localhost:3306/msa_exam
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: ewqdsa1927
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
   data:
     redis:
       host: localhost
