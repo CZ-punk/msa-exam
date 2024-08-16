@@ -12,13 +12,4 @@ public class ProductResponseDto {
     private String name;
     private Integer supply_price;
 
-//    private Integer quantity;
-//    private String description;
-
-//    private LocalDateTime createdAt;
-//    private LocalDateTime updatedAt;
-//
-//    private String createdBy;
-//    private String updatedBy;
-
 }

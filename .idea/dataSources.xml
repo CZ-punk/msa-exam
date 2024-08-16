@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="6203b9d9-5dcd-442b-8e48-336c8477f58d">
-      <driver-ref>redis</driver-ref>
+    <data-source source="LOCAL" name="msa_exam@localhost" uuid="5f1b7478-0ae5-4e59-a71d-8a57ff97d08a">
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>jdbc.RedisDriver</jdbc-driver>
-      <jdbc-url>jdbc:redis://localhost:6379/</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/msa_exam</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
@@ -13,11 +13,11 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="msa_exam@localhost" uuid="da164a0c-ed3c-4579-b891-7215070091d2">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="@localhost" uuid="d4012437-ca1a-4a8d-a270-3a76d6528e59">
+      <driver-ref>redis</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/msa_practice</jdbc-url>
+      <jdbc-driver>jdbc.RedisDriver</jdbc-driver>
+      <jdbc-url>jdbc:redis://localhost:6379/</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />

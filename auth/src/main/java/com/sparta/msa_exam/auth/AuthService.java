@@ -61,23 +61,17 @@ public class AuthService {
         if (user != null) {
             throw new IllegalArgumentException("Duplicated username!");
         }
+
         String encodedPassword = passwordEncoder.encode(password);
-//        if (code != null && code.equals(ADMIN_CODE)) {
-//            log.info("Find Admin Code! Your Authority is Admin!");
-//            userRepository.save(new User(username, encodedPassword, UserRoleEnum.ADMIN));
-//        } else {
-//            log.info("You are common User");
-//
-//        }
         userRepository.save(new User(username, encodedPassword, UserRoleEnum.USER));
     }
 
     public String signin(String username, String password) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("No Search Username!"));
-
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("Not Anything Matched Password!");
         }
+
         return createToken(user.getUsername(), user.getRole());
     }
 }

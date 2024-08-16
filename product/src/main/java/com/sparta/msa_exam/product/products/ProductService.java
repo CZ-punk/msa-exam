@@ -55,10 +55,11 @@ public class ProductService {
 
     @Transactional
     @CacheEvict(cacheNames = "productCache", key = "args[0]")
-    public String deleteProduct(Long id) {
-        productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not Found Product By Id:" + id));
+    public ProductResponseDto deleteProduct(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not Found Product By Id:" + id));
         productRepository.deleteById(id);
-        return "Product Id: " + id + " deleted!";
+        return new ProductResponseDto(product);
+
     }
 
 }

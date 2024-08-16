@@ -23,19 +23,11 @@ public class Order {
     private String name;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> product_ids = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public Order(String name) {
         this.name = name;
     }
-
-    //    @Enumerated(EnumType.STRING)
-//    private OrderStatus status;
-
-//    public Order(OrderStatus status) {
-//        this.status = status;
-//    }
-
 }
 
 
